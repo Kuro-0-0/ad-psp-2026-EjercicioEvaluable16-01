@@ -3,6 +3,7 @@ package com.salesianostriana.dam.eventify.services;
 import com.salesianostriana.dam.eventify.entities.Entrada;
 import com.salesianostriana.dam.eventify.entities.extras.Estado;
 import com.salesianostriana.dam.eventify.errors.AsistenteNotFoundException;
+import com.salesianostriana.dam.eventify.errors.EntradaNotFoundException;
 import com.salesianostriana.dam.eventify.errors.EventoNotFoundException;
 import com.salesianostriana.dam.eventify.errors.NotEnoughCapacityException;
 import com.salesianostriana.dam.eventify.repositories.AsistenteRepository;
@@ -36,7 +37,9 @@ public class EntradaService {
         return repository.save(entrada);
     }
 
-    public Entrada cancelarEntrada(Entrada entrada) {
+    public Entrada cancelarEntrada(Long idEntrada) {
+
+        Entrada entrada = repository.findById(idEntrada).orElseThrow(() -> new EntradaNotFoundException("Entrada no encontrada"));
 
         entrada.setEstado(Estado.CANCELADA);
         eventoService.cancelarEntrada(entrada.getEvento());

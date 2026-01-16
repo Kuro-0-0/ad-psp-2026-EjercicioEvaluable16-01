@@ -1,11 +1,16 @@
 package com.salesianostriana.dam.eventify.services;
 
+import com.salesianostriana.dam.eventify.entities.Entrada;
 import com.salesianostriana.dam.eventify.entities.Evento;
 import com.salesianostriana.dam.eventify.errors.EventoNotFoundException;
 import com.salesianostriana.dam.eventify.errors.NotEnoughCapacityException;
 import com.salesianostriana.dam.eventify.repositories.EventoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.nio.channels.FileChannel;
 
 @Service @RequiredArgsConstructor
 public class EventoService {
@@ -31,5 +36,9 @@ public class EventoService {
         evento.setEntradasVendidas(evento.getEntradasVendidas() - 1);
         repository.save(evento);
 
+    }
+
+    public Page<Entrada> getEntradasByEvento(Long id, Pageable pageable) {
+        return repository.findEntradaByEventoId(id, pageable);
     }
 }
