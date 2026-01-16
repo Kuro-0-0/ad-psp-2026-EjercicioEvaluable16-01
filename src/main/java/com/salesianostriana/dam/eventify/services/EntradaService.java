@@ -22,13 +22,13 @@ public class EntradaService {
     private final EventoService eventoService;
     private final AsistenteRepository asistenteRepository;
 
-    public Entrada comprarEntrada(Long idEvento, Long idAsistente) {
+    public Entrada comprarEntrada(Entrada entrada) {
 
-        Entrada entrada = Entrada.builder()
+        entrada = Entrada.builder()
                 .fechaCompra(LocalDate.now())
                 .estado(Estado.ACTIVA)
-                .evento(eventoService.buscarEvento(idEvento))
-                .asistente(asistenteRepository.findById(idAsistente).orElseThrow(() -> new AsistenteNotFoundException("Asistente no encontrado")))
+                .evento(eventoService.buscarEvento(entrada.getEvento().getId()))
+                .asistente(asistenteRepository.findById(entrada.getAsistente().getId()).orElseThrow(() -> new AsistenteNotFoundException("Asistente no encontrado")))
                 .build();
 
         eventoService.comprarEntrada(entrada.getEvento());
