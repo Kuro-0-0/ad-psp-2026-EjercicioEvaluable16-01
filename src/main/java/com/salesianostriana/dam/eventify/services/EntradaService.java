@@ -36,5 +36,13 @@ public class EntradaService {
         return repository.save(entrada);
     }
 
+    public Entrada cancelarEntrada(Entrada entrada) {
+
+        entrada.setEstado(Estado.CANCELADA);
+        eventoService.cancelarEntrada(entrada.getEvento());
+
+        return repository.save(entrada);
+    }
+
 }
 

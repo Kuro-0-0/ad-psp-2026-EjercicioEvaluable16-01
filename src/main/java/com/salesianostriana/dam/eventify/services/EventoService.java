@@ -26,4 +26,10 @@ public class EventoService {
         repository.save(evento);
     }
 
+    public void cancelarEntrada(Evento evento) {
+
+        evento.setEntradasVendidas(evento.getEntradasVendidas() - 1);
+        repository.save(evento);
+
+    }
 }
