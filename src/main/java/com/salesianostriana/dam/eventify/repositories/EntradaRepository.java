@@ -2,6 +2,8 @@ package com.salesianostriana.dam.eventify.repositories;
 
 import com.salesianostriana.dam.eventify.entities.Entrada;
 import com.salesianostriana.dam.eventify.entities.extras.Estado;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +21,6 @@ public interface EntradaRepository extends JpaRepository<Entrada, Long> {
     @Query(
             "SELECT e FROM Entrada e WHERE e.evento.id = :id"
     )
-    List<Entrada> findByEvento(Long id);
+    Page<Entrada> findByEvento(Long id, Pageable pageable);
 
 }

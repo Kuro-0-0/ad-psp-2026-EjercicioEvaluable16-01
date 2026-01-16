@@ -8,10 +8,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface EventoRepository extends JpaRepository<Evento, Long> {
-
-    @EntityGraph(attributePaths = {"entradas"})
-    Page<Entrada> findEntradaByEventoId(Long id, Pageable pageable);
-
-}
+public interface EventoRepository extends JpaRepository<Evento, Long> {}
