@@ -23,5 +23,11 @@ public class Entrada {
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Evento evento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Asistente asistente;
+
 
 }
